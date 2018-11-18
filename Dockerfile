@@ -1,8 +1,7 @@
 FROM nefarioustim/python
-ENV PIPENV_SHELL=/bin/bash
+
 WORKDIR /app
-COPY . ./
-RUN set -ex && pipenv install --dev --skip-lock                         &&\
-    rm -rf /root/.cache /var/cache /usr/share/terminfo
+COPY requirements.txt ./
+RUN pip install --no-cache-dir -r requirements.txt
 
 CMD ["rq", "worker"]
